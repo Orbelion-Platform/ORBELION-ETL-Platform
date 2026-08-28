@@ -1,0 +1,27 @@
+client: example_client
+process_name: example_client_synthetic_orders
+metadata_root: metadata
+sources:
+  - name: demo_orders
+    type: csv
+    path: demo/data/orders.csv
+mappings:
+  demo_orders: demo_orders
+schemas:
+  demo_orders: demo_orders
+rules:
+  demo_orders: demo_orders
+required_columns:
+  - order_id
+  - line_id
+  - customer_code
+  - product_code
+  - quantity
+  - unit_price
+  - order_date
+  - total
+keys:
+  order_line_key:
+    - order_id
+    - line_id
+

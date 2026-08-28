@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://orbelion.local/schemas/client-manifest-1.0.json",
+  "title": "Orbelion Client Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["client", "destination", "sources", "scheduling", "versions"],
+  "properties": {
+    "client": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "code", "environment", "country", "currency", "timezone"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "code": {"type": "string", "pattern": "^[a-z][a-z0-9_]{2,49}$"},
+        "environment": {"type": "string", "enum": ["DEV", "PROD"]},
+        "country": {"type": "string", "minLength": 2},
+        "currency": {"type": "string", "pattern": "^[A-Z]{3}$"},
+        "timezone": {"type": "string", "minLength": 3}
+      }
+    },
+    "destination": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["engine", "server_env", "database_env", "schema"],
+      "properties": {
+        "engine": {"type": "string", "enum": ["SQL_SERVER"]},
+        "server_env": {"$ref": "#/$defs/envName"},
+        "database_env": {"$ref": "#/$defs/envName"},
+        "dev_server": {"type": "string", "minLength": 1},
+        "dev_database": {"type": "string", "minLength": 1},
+        "user_env": {"$ref": "#/$defs/envName"},
+        "password_env": {"$ref": "#/$defs/envName"},
+        "auth_mode": {"type": "string", "enum": ["SQL_PASSWORD", "MANAGED_IDENTITY"]},
+        "managed_identity_client_id_env": {"$ref": "#/$defs/envName"},
+        "schema": {"type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_]*$"}
+      }
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["type", "enabled", "modules"],
+        "properties": {
+          "type": {"type": "string", "enum": ["ODOO", "REST", "CSV", "EXCEL", "SQL"]},
+          "provider": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]*$"},
+          "enabled": {"type": "boolean"},
+          "modules": {
+            "type": "array",
+            "minItems": 1,
+            "items": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]*$"},
+            "uniqueItems": true
+          },
+          "connection": {"type": "object"},
+          "path": {"type": "string"},
+          "url_env": {"$ref": "#/$defs/envName"},
+          "token_env": {"$ref": "#/$defs/envName"}
+        }
+      }
+    },
+    "scheduling": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["etl_interval", "automation_jobs"],
+      "properties": {
+        "etl_interval": {"type": "string", "pattern": "^[1-9][0-9]*_(MINUTES|HOURS|DAYS)$"},
+        "automation_jobs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "interval"],
+            "properties": {
+              "name": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+              "interval": {"type": "string", "pattern": "^[1-9][0-9]*_(MINUTES|HOURS|DAYS)$"},
+              "enabled": {"type": "boolean"}
+            }
+          }
+        }
+      }
+    },
+    "versions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["framework", "ddl", "metadata"],
+      "properties": {
+        "framework": {"type": "string", "minLength": 1},
+        "ddl": {"type": "string", "minLength": 1},
+        "metadata": {"type": "string", "minLength": 1}
+      }
+    }
+  },
+  "$defs": {
+    "envName": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]*$"}
+  }
+}

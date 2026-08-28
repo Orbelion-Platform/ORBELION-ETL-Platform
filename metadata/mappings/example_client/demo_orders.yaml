@@ -1,0 +1,15 @@
+columns:
+  order id: order_id
+  line id: line_id
+  customer code: customer_code
+  product code: product_code
+  quantity: quantity
+  unit price: unit_price
+  order date: order_date
+derived_columns:
+  total:
+    operation: multiply
+    columns:
+      - quantity
+      - unit_price
+

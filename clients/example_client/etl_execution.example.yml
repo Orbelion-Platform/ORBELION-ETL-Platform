@@ -1,0 +1,11 @@
+client: example_client
+environments:
+  demo:
+    sql_server: ${SQL_SERVER}
+    sql_database: ${SQL_DATABASE}
+    pipelines:
+      - configs/example_client/odoo_sales_dev.yaml
+      - configs/example_client/odoo_purchase_dev.yaml
+      - configs/example_client/odoo_inventory_dev.yaml
+      - configs/example_client/odoo_accounting_dev.yaml
+

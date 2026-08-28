@@ -1,0 +1,18 @@
+columns:
+  order_id:
+    type: NVARCHAR
+  line_id:
+    type: INTEGER
+  customer_code:
+    type: NVARCHAR
+  product_code:
+    type: NVARCHAR
+  quantity:
+    type: DECIMAL
+  unit_price:
+    type: DECIMAL
+  order_date:
+    type: DATE
+  total:
+    type: DECIMAL
+

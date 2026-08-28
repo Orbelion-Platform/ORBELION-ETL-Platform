@@ -1,0 +1,19 @@
+framework: 2.1.0
+ddl: 2.0.1
+metadata: 2.0.1
+manifest_schema: 1.0.0
+compatible_manifest_framework:
+  - 1.1.0
+  - 2.0.0
+  - 2.0.1
+  - 2.0.2
+  - 2.0.3
+  - 2.1.0
+compatible_ddl:
+  - 1.1.0
+  - 2.0.0
+  - 2.0.1
+  - 2.0.1
+compatible_metadata:
+  - 1.1.0
+  - 2.0.0

@@ -1,0 +1,34 @@
+name: Azure OIDC and Key Vault Example
+
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  verify-identity:
+    runs-on: ubuntu-latest
+    environment: demo
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      ORBELION_KEY_VAULT_NAME: ${{ vars.ORBELION_KEY_VAULT_NAME }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate example configuration
+        shell: bash
+        run: |
+          test -n "${{ vars.AZURE_CLIENT_ID }}"
+          test -n "${{ vars.AZURE_TENANT_ID }}"
+          test -n "$ORBELION_KEY_VAULT_NAME"
+      - name: Azure login with OIDC
+        uses: azure/login@v2
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          allow-no-subscriptions: true
+      - name: Verify configured Key Vault is reachable
+        shell: bash
+        run: az keyvault show --name "$ORBELION_KEY_VAULT_NAME" --query name --output tsv > /dev/null
+

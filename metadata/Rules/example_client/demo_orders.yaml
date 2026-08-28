@@ -1,0 +1,15 @@
+required_columns:
+  - order_id
+  - line_id
+  - customer_code
+  - product_code
+  - quantity
+  - unit_price
+  - order_date
+  - total
+string_cleaning:
+  trim: true
+  collapse_spaces: true
+amount_normalization:
+  remove_currency_symbols: true
+

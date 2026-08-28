@@ -1,0 +1,25 @@
+# Standard multi-client PROD template. Tokens are resolved by initialize-client.
+environment: prod
+client: "{{CLIENT_CODE}}"
+process_name: "{{PROCESS_NAME}}"
+server: "{{SERVER_REFERENCE}}"
+database: "{{DATABASE_REFERENCE}}"
+engine: sqlserver
+user: "${DB_USER}"
+password: "${DB_PASSWORD}"
+encrypt: true
+trust_server_certificate: false
+schema: "{{DESTINATION_SCHEMA}}"
+staging_table: "{{STAGING_TABLE}}"
+load_mode: incremental
+incremental_column: "{{INCREMENTAL_COLUMN}}"
+sources:
+  - name: "{{SOURCE_NAME}}"
+    type: "{{SOURCE_TYPE}}"
+mappings: {}
+schemas: {}
+rules: {}
+required_columns: []
+keys: {}
+dimensions: []
+facts: []
