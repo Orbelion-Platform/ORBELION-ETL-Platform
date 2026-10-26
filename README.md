@@ -27,12 +27,12 @@ The platform provides:
 ## Architecture
 
 <p align="center">
-  <a href="assets/etl-workflow.svg">
-    <img src="assets/etl-workflow.svg" alt="ORBELION ETL Platform workflow from supported data sources through extraction, transformation, validation, loading, and the analytical warehouse" width="100%">
+  <a href="docs/assets/etl-workflow.png">
+    <img src="docs/assets/etl-workflow.png" alt="ORBELION ETL System workflow from enterprise data sources through extraction, transformation, loading, storage, and analytics consumption" width="100%">
   </a>
 </p>
 
-The workflow asset summarizes the public mirror's implemented path from supported sources through metadata-driven processing to SQL Server / Azure SQL and analytical consumers.
+The workflow asset presents the ORBELION ETL architecture from enterprise data sources through processing, storage, and analytical consumption.
 
 ```mermaid
 flowchart LR
