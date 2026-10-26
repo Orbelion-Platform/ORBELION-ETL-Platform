@@ -34,45 +34,6 @@ The platform provides:
 
 The workflow asset presents the ORBELION ETL architecture from enterprise data sources through processing, storage, and analytical consumption.
 
-```mermaid
-flowchart LR
-    subgraph Sources
-        O[Odoo XML-RPC]
-        R[REST API]
-        S[SQL source]
-        F[CSV / Excel]
-    end
-
-    subgraph Platform[ORBELION ETL Platform]
-        C[Connector registry]
-        M[YAML metadata]
-        P[Pipeline runner]
-        A[Audit and watermarks]
-    end
-
-    subgraph Azure
-        KV[Azure Key Vault]
-        DB[(Azure SQL)]
-        MI[Managed Identity / OIDC]
-    end
-
-    BI[Analytics and applications]
-
-    O --> C
-    R --> C
-    S --> C
-    F --> C
-    C --> P
-    M --> P
-    MI --> KV
-    MI --> DB
-    KV --> P
-    P --> DB
-    P --> A
-    A --> DB
-    DB --> BI
-```
-
 See [Architecture overview](docs/architecture/overview.md) and [versioned Mermaid diagrams](docs/diagrams/system-context.md).
 
 ## Core Features
